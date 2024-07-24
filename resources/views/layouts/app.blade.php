@@ -482,10 +482,10 @@
                         <div class="header-tools__item hover-container">
                             <a href="{{ Auth::user()->utype == 'ADM' ? route('admin.index'): route('user.index') }}" class="header-tools__item">
                                 <span class="pr-6px">{{ Auth::user()->name }}</span>
-                                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                {{-- <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <use href="#icon_user" />
-                                </svg>
+                                </svg> --}}
                             </a>
                         </div>
                     @endguest

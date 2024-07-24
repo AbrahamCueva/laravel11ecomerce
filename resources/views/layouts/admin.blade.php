@@ -21,6 +21,7 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('images/favicon.ico') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @stack('styles')
 </head>
 
@@ -162,7 +163,9 @@
                                     <form action="{{ route('logout') }}" id="logout-form" method="POST">
                                         @csrf
                                         <a href="{{ route('logout') }}" class="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <div class="icon"><i class="icon-logout"></i></div>
+                                            <div class="icon">
+                                                <i class="fa-solid fa-right-from-bracket"></i>
+                                            </div>
                                             <div class="text">Cerrar sesión</div>
                                         </a>
                                     </form>
