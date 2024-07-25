@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.3/dist/sweetalert2.min.css">
+@endpush
 @section('content')
     <div class="main-content-inner">
         <div class="main-content-wrap">
@@ -72,7 +75,10 @@
                                                         <i class="icon-edit-3"></i>
                                                     </div>
                                                 </a>
-                                                <form action="#" method="POST">
+                                                <form action="{{ route('admin.brand.delete', ['id' => $brand->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
                                                     <div class="item text-danger delete">
                                                         <i class="icon-trash-2"></i>
                                                     </div>
@@ -93,3 +99,29 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.3/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $(function() {
+            $(".delete").on('click', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "Estás seguro/a de eliminar este registro?",
+                    icon: "warning", // Cambié 'type' a 'icon', que es la nueva sintaxis de SweetAlert2
+                    showCancelButton: true, // Asegúrate de mostrar el botón de cancelar
+                    confirmButtonText: "¡Sí!", // Texto del botón de confirmación
+                    cancelButtonText: "¡No!", // Texto del botón de cancelar
+                    confirmButtonColor: '#dc3545', // Color del botón de confirmación
+                    cancelButtonColor: '#6c757d' // Puedes agregar el color del botón de cancelar si deseas
+                }).then(function(result) {
+                    if (result.isConfirmed) { // Verifica si el botón de confirmación fue presionado
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
