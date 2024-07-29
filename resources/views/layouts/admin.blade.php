@@ -105,7 +105,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="add-category.html" class="">
+                                            <a href="{{ route('admin.category.add') }}" class="">
                                                 <div class="text">Nueva categoría</div>
                                             </a>
                                         </li>
