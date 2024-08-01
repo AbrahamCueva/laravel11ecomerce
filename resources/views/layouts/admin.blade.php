@@ -69,7 +69,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="add-product.html" class="">
+                                            <a href="{{ route('admin.products.add') }}" class="">
                                                 <div class="text">Nuevo producto</div>
                                             </a>
                                         </li>
