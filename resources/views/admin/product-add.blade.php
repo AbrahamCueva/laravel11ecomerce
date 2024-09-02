@@ -99,8 +99,8 @@
                     <fieldset class="description">
                         <div class="body-title mb-10">Descripción <span class="tf-color-1">*</span>
                         </div>
-                        <textarea class="mb-10" name="description" placeholder="Descripción" tabindex="0" aria-required="true"
-                            required="">{{ old('description') }}</textarea>
+                        <textarea class="mb-10" name="description" id="description" placeholder="Descripción" tabindex="0"
+                            aria-required="true" required="">{{ old('description') }}</textarea>
                         {{-- <div class="text-tiny">Do not exceed 100 characters when entering the product name.</div> --}}
                     </fieldset>
                     @error('description')
@@ -136,8 +136,8 @@
                         <div class="body-title mb-10">Subir galería de imágenes</div>
                         <div class="upload-image mb-16">
                             <!-- <div class="item">
-                            <img src="images/upload/upload-1.png" alt="">
-                        </div>                                                 -->
+                                <img src="images/upload/upload-1.png" alt="">
+                            </div>                                                 -->
                             <div id="galUpload" class="item up-load">
                                 <label class="uploadfile" for="gFile">
                                     <span class="icon">
@@ -236,37 +236,49 @@
     </div>
 @endsection
 
-@push("scripts")
+@push('scripts')
+    <script src="https://cdn.tiny.cloud/1/eycv6d1fmy1aovlq0unwuqasp62r8to6d805xscpvnafotn7/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
     <script>
-            $(function(){
-                $("#myFile").on("change",function(e){
-                    const photoInp = $("#myFile");                    
-                    const [file] = this.files;
-                    if (file) {
-                        $("#imgpreview img").attr('src',URL.createObjectURL(file));
-                        $("#imgpreview").show();                        
-                    }
-                });
-
-
-                $("#gFile").on("change",function(e){
-                    const gFile = $("#gFile");
-                    const gphotos = this.files;                    
-                    $.each(gphotos,function(key,val){                        
-                        $("#galUpload").prepend(`<div class="item gitems"><img src="${URL.createObjectURL(val)}" alt=""></div>`);                        
-                    });                    
-                });
-
-
-                $("input[name='name']").on("change",function(){
-                    $("input[name='slug']").val(StringToSlug($(this).val()));
-                });
-                
+        tinymce.init({
+            selector: '#description',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        });
+    </script>
+    <script>
+        $(function() {
+            $("#myFile").on("change", function(e) {
+                const photoInp = $("#myFile");
+                const [file] = this.files;
+                if (file) {
+                    $("#imgpreview img").attr('src', URL.createObjectURL(file));
+                    $("#imgpreview").show();
+                }
             });
-            function StringToSlug(Text) {
-                return Text.toLowerCase()
+
+
+            $("#gFile").on("change", function(e) {
+                const gFile = $("#gFile");
+                const gphotos = this.files;
+                $.each(gphotos, function(key, val) {
+                    $("#galUpload").prepend(
+                        `<div class="item gitems"><img src="${URL.createObjectURL(val)}" alt=""></div>`
+                        );
+                });
+            });
+
+
+            $("input[name='name']").on("change", function() {
+                $("input[name='slug']").val(StringToSlug($(this).val()));
+            });
+
+        });
+
+        function StringToSlug(Text) {
+            return Text.toLowerCase()
                 .replace(/[^\w ]+/g, "")
                 .replace(/ +/g, "-");
-            }      
+        }
     </script>
 @endpush

@@ -105,7 +105,7 @@
                     <fieldset class="description">
                         <div class="body-title mb-10">Descripción <span class="tf-color-1">*</span>
                         </div>
-                        <textarea class="mb-10" name="description" placeholder="Descripción" tabindex="0" aria-required="true"
+                        <textarea class="mb-10" name="description" id="description" placeholder="Descripción" tabindex="0" aria-required="true"
                             required="">{{ $product->description }}</textarea>
                         {{-- <div class="text-tiny">Do not exceed 100 characters when entering the product name.</div> --}}
                     </fieldset>
@@ -252,6 +252,15 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.tiny.cloud/1/eycv6d1fmy1aovlq0unwuqasp62r8to6d805xscpvnafotn7/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#description',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        });
+    </script>
     <script>
         $(function() {
             $("#myFile").on("change", function(e) {
@@ -271,7 +280,7 @@
                 $.each(gphotos, function(key, val) {
                     $("#galUpload").prepend(
                         `<div class="item gitems"><img src="${URL.createObjectURL(val)}" alt=""></div>`
-                        );
+                    );
                 });
             });
 
