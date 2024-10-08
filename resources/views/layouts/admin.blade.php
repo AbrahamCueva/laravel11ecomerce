@@ -464,7 +464,7 @@
                     <div class="main-content">
                         @yield('content')
                         <div class="bottom-page">
-                            <div class="body-text">Copyright © <?php echo date('Y'); ?> SurfsideMedia</div>
+                            <div class="body-text">Copyright © <?php echo date('Y'); ?> Abraham</div>
                         </div>
                     </div>
 

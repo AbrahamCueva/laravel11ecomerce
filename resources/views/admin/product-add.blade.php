@@ -204,8 +204,8 @@
                             <div class="body-title mb-10">Stock</div>
                             <div class="select mb-10">
                                 <select class="" name="stock_status">
-                                    <option value="instock">InStock</option>
-                                    <option value="outofstock">Out of Stock</option>
+                                    <option value="instock">En stock</option>
+                                    <option value="outofstock">Sin stock</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -237,7 +237,7 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.tiny.cloud/1/eycv6d1fmy1aovlq0unwuqasp62r8to6d805xscpvnafotn7/tinymce/7/tinymce.min.js"
+    {{-- <script src="https://cdn.tiny.cloud/1/eycv6d1fmy1aovlq0unwuqasp62r8to6d805xscpvnafotn7/tinymce/7/tinymce.min.js"
         referrerpolicy="origin"></script>
     <script>
         tinymce.init({
@@ -245,7 +245,7 @@
             plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         });
-    </script>
+    </script> --}}
     <script>
         $(function() {
             $("#myFile").on("change", function(e) {

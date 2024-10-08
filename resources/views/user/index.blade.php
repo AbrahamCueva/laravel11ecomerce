@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="page-content my-account__dashboard">
-                        <p>Hola <strong>Usuario</strong></p>
+                        <p>Hola <strong>{{ Auth::user()->name }}</strong></p>
                         <p>Desde el panel de control de tu cuenta, puedes ver tus <a class="unerline-link"
                                 href="account_orders.html">pedidos
                                 recientes</a>, gestionar tus <a class="unerline-link" href="account_edit_address.html">direcciones de

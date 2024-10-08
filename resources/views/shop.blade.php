@@ -358,9 +358,11 @@
 
                 <div class="d-flex justify-content-between mb-4 pb-md-2">
                     <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
-                        <a href="{{ route('home.index') }}" class="menu-link menu-link_us-s text-uppercase fw-medium">Inicio</a>
+                        <a href="{{ route('home.index') }}"
+                            class="menu-link menu-link_us-s text-uppercase fw-medium">Inicio</a>
                         <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
-                        <a href="{{ route('shop.index') }}" class="menu-link menu-link_us-s text-uppercase fw-medium">Tienda</a>
+                        <a href="{{ route('shop.index') }}"
+                            class="menu-link menu-link_us-s text-uppercase fw-medium">Tienda</a>
                     </div>
 
                     <div
@@ -412,15 +414,21 @@
                                         data-settings='{"resizeObserver": true}'>
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
-                                                <a href="{{ route('shop.product.details', ['product_slug' => $product->slug]) }}"><img loading="lazy"
-                                                        src="{{ asset('uploads/products') }}/{{ $product->image }}" width="330"
-                                                        height="400" alt="{{ $product->name }}" class="pc__img"></a>
+                                                <a
+                                                    href="{{ route('shop.product.details', ['product_slug' => $product->slug]) }}"><img
+                                                        loading="lazy"
+                                                        src="{{ asset('uploads/products') }}/{{ $product->image }}"
+                                                        width="330" height="400" alt="{{ $product->name }}"
+                                                        class="pc__img"></a>
                                             </div>
                                             <div class="swiper-slide">
-                                                @foreach (explode(",", $product->images) as $gimg)
-                                                    <a href="{{ route('shop.product.details', ['product_slug' => $product->slug]) }}"><img loading="lazy"
-                                                        src="{{ asset('uploads/products') }}/{{ $gimg }}" width="330"
-                                                        height="400" alt="{{ $product->name }}" class="pc__img"></a>
+                                                @foreach (explode(',', $product->images) as $gimg)
+                                                    <a
+                                                        href="{{ route('shop.product.details', ['product_slug' => $product->slug]) }}"><img
+                                                            loading="lazy"
+                                                            src="{{ asset('uploads/products') }}/{{ $gimg }}"
+                                                            width="330" height="400" alt="{{ $product->name }}"
+                                                            class="pc__img"></a>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -433,36 +441,56 @@
                                                 <use href="#icon_next_sm" />
                                             </svg></span>
                                     </div>
-                                    <button
-                                        class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                                        data-aside="cartDrawer" title="Add To Cart">Agregar al cesto</button>
+                                    @if (Cart::instance('cart')->content()->where('id', $product->id)->count() > 0)
+                                        <a href="{{ route('cart.index') }}"
+                                            class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">¡Ir
+                                            al cesto!</a>
+                                    @else
+                                        <form name="addtocart-form" method="post" action="{{ route('cart.add') }}">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}">
+                                            <button type="submit" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium" data-aside="cartDrawer" title="Add To Cart">Agregar al cesto</button>
+                                        </form>
+                                    @endif
                                 </div>
 
                                 <div class="pc__info position-relative">
                                     <p class="pc__category">{{ $product->category->name }}</p>
-                                    <h6 class="pc__title"><a href="{{ route('shop.product.details', ['product_slug' => $product->slug]) }}">{{ $product->name }}</a></h6>
+                                    <h6 class="pc__title"><a
+                                            href="{{ route('shop.product.details', ['product_slug' => $product->slug]) }}">{{ $product->name }}</a>
+                                    </h6>
                                     <div class="product-card__price d-flex">
                                         @if ($product->sale_price)
-                                            <s style="color: red">$ {{ number_format($product->regular_price, 2) }}</s>       $ {{ number_format($product->sale_price, 2) }}
+                                            <s style="color: red">$ {{ number_format($product->regular_price, 2) }}</s> $
+                                            {{ number_format($product->sale_price, 2) }}
                                         @else
-                                            <span class="money price">$ {{ number_format($product->regular_price, 2) }}</span>
+                                            <span class="money price">$
+                                                {{ number_format($product->regular_price, 2) }}</span>
                                         @endif
                                     </div>
                                     <div class="product-card__review d-flex align-items-center">
                                         <div class="reviews-group d-flex">
-                                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="review-star" viewBox="0 0 9 9"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <use href="#icon_star" />
                                             </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="review-star" viewBox="0 0 9 9"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <use href="#icon_star" />
                                             </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="review-star" viewBox="0 0 9 9"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <use href="#icon_star" />
                                             </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="review-star" viewBox="0 0 9 9"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <use href="#icon_star" />
                                             </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="review-star" viewBox="0 0 9 9"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <use href="#icon_star" />
                                             </svg>
                                         </div>
