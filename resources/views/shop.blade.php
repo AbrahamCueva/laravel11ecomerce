@@ -151,7 +151,7 @@
                             <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#accordion-filter-brand" aria-expanded="true"
                                 aria-controls="accordion-filter-brand">
-                                Brands
+                                Marcas
                                 <svg class="accordion-button__icon type2" viewBox="0 0 10 6"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g aria-hidden="true" stroke="none" fill-rule="evenodd">
@@ -164,57 +164,22 @@
                         <div id="accordion-filter-brand" class="accordion-collapse collapse show border-0"
                             aria-labelledby="accordion-heading-brand" data-bs-parent="#brand-filters">
                             <div class="search-field multi-select accordion-body px-0 pb-0">
-                                <select class="d-none" multiple name="total-numbers-list">
-                                    <option value="1">Adidas</option>
-                                    <option value="2">Balmain</option>
-                                    <option value="3">Balenciaga</option>
-                                    <option value="4">Burberry</option>
-                                    <option value="5">Kenzo</option>
-                                    <option value="5">Givenchy</option>
-                                    <option value="5">Zara</option>
-                                </select>
-                                <div class="search-field__input-wrapper mb-3">
-                                    <input type="text" name="search_text"
-                                        class="search-field__input form-control form-control-sm border-light border-2"
-                                        placeholder="Search" />
-                                </div>
-                                <ul class="multi-select__list list-unstyled">
-                                    <li
-                                        class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                        <span class="me-auto">Adidas</span>
-                                        <span class="text-secondary">2</span>
-                                    </li>
-                                    <li
-                                        class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                        <span class="me-auto">Balmain</span>
-                                        <span class="text-secondary">7</span>
-                                    </li>
-                                    <li
-                                        class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                        <span class="me-auto">Balenciaga</span>
-                                        <span class="text-secondary">10</span>
-                                    </li>
-                                    <li
-                                        class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                        <span class="me-auto">Burberry</span>
-                                        <span class="text-secondary">39</span>
-                                    </li>
-                                    <li
-                                        class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                        <span class="me-auto">Kenzo</span>
-                                        <span class="text-secondary">95</span>
-                                    </li>
-                                    <li
-                                        class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                        <span class="me-auto">Givenchy</span>
-                                        <span class="text-secondary">1092</span>
-                                    </li>
-                                    <li
-                                        class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                        <span class="me-auto">Zara</span>
-                                        <span class="text-secondary">48</span>
-                                    </li>
-                                </ul>
+                                <ul class="list list-inline mb-0 brand-list">
+                                    @foreach ($brands as $brand)
+                                        @if($brand->products->count() > 0)
+                                            <li class="list-item">
+                                                <span class="menu-link py-1">
+                                                    <input type="checkbox" name="brands" value="{{ $brand->id }}" class="chk-brand" 
+                                                        @if(in_array($brand->id, explode(',', $f_brands))) checked="checked" @endif>
+                                                    {{ $brand->name }}
+                                                </span>
+                                                <span class="text-right float-end">
+                                                    {{ $brand->products->count() }}
+                                                </span>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>                                
                             </div>
                         </div>
                     </div>
@@ -386,7 +351,7 @@
                         <div class="shop-asc__seprator mx-3 bg-light d-none d-md-block order-md-0"></div>
 
                         <div class="col-size align-items-center order-1 d-none d-lg-flex">
-                            <span class="text-uppercase fw-medium me-2">View</span>
+                            <span class="text-uppercase fw-medium me-2">Ver de</span>
                             <button class="btn-link fw-medium me-2 js-cols-size" data-target="products-grid"
                                 data-cols="2">2</button>
                             <button class="btn-link fw-medium me-2 js-cols-size" data-target="products-grid"
@@ -527,6 +492,7 @@
         <input type="hidden" name="page" value="{{ $products->currentPage() }}">
         <input type="hidden" name="size" id="size" value="{{ $size }}">
         <input type="hidden" name="order" id="order" value="{{ $order }}">
+        <input type="hidden" name="brands" id="hdnBrands"">
     </form>
 @endsection
 
@@ -539,6 +505,19 @@
 
         $("#orderby").on("change", function() {
             $("#order").val($("#orderby option:selected").val());
+            $("#frmfilter").submit();
+        });
+
+        $("input[name='brands']").on("change", function() {
+            var brands = "";
+            $("input[name='brands']:checked").each(function() {
+                if (brands == 0) {
+                    brands += $(this).val();
+                } else {
+                    brands += "," + $(this).val();
+                }
+            });
+            $("#hdnBrands").val(brands);
             $("#frmfilter").submit();
         });
     </script>
