@@ -44,7 +44,8 @@
                             </div>
                         </form>
                     </div>
-                    <a class="tf-button style-1 w208" href="{{ route('admin.coupon.add') }}"><i class="icon-plus"></i>Agregar cupón</a>
+                    <a class="tf-button style-1 w208" href="{{ route('admin.coupon.add') }}"><i
+                            class="icon-plus"></i>Agregar cupón</a>
                 </div>
                 <div class="wg-table table-all-user">
                     <div class="table-responsive">
@@ -74,11 +75,13 @@
                                         <td>{{ $coupon->expiry_date }}</td>
                                         <td>
                                             <div class="list-icon-function">
-                                                <a href="#">
-                                                    <div class="item edit">
-                                                        <i class="icon-edit-3"></i>
-                                                    </div>
-                                                </a>
+                                                <div class="list-icon-function">
+                                                    <a href="{{ route('admin.coupon.edit', ['id' => $coupon->id]) }}">
+                                                        <div class="item edit">
+                                                            <i class="icon-edit-3"></i>
+                                                        </div>
+                                                    </a>
+                                                </div>
                                                 <div class="item text-danger delete">
                                                     <i class="icon-trash-2"></i>
                                                 </div>
