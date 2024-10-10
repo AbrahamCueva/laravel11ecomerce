@@ -361,7 +361,7 @@ class AdminController extends Controller
             $gallery_images = implode(',', $gallery_arr);
             $product->images = $gallery_images;
         }
-        
+
         $product->save();
         return redirect()->route('admin.products')->with('status', '¡Producto actualizado exitosamente!');
     }
@@ -388,8 +388,33 @@ class AdminController extends Controller
     }
 
     public function coupons()
-{
-        $coupons = Coupun::orderBy("expiry_date","DESC")->paginate(12);
-        return view("admin.coupons",compact("coupons"));
-}
+    {
+        $coupons = Coupun::orderBy("expiry_date", "DESC")->paginate(12);
+        return view("admin.coupons", compact("coupons"));
+    }
+
+    public function add_coupon()
+    {
+        return view("admin.coupon-add");
+    }
+
+    public function add_coupon_store(Request $request)
+    {
+        $request->validate([
+            'code' => 'required',
+            'type' => 'required',
+            'value' => 'required|numeric',
+            'cart_value' => 'required|numeric',
+            'expiry_date' => 'required|date'
+        ]);
+
+        $coupon = new Coupun();
+        $coupon->code = $request->code;
+        $coupon->type = $request->type;
+        $coupon->value = $request->value;
+        $coupon->cart_value = $request->cart_value;
+        $coupon->expiry_date = $request->expiry_date;
+        $coupon->save();
+        return redirect()->route("admin.coupons")->with('status', '¡Cupón creado exitosamente!');
+    }
 }
