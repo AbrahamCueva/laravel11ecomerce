@@ -443,4 +443,11 @@ class AdminController extends Controller
         $coupon->save();
         return redirect()->route('admin.coupons')->with('status', '¡Cupón actualizado exitosamente!');
     }
+
+    public function delete_coupon($id)
+    {
+        $coupon = Coupun::find($id);
+        $coupon->delete();
+        return redirect()->route('admin.coupons')->with('status', '¡Cupón eliminado exitosamente!');
+    }
 }
