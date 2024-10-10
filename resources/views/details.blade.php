@@ -146,10 +146,27 @@
                         </form>
                     @endif
                     <div class="product-single__addtolinks">
-                        <a href="#" class="menu-link menu-link_us-s add-to-wishlist"><svg width="16"
-                                height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_heart" />
-                            </svg><span>Agregar a favoritos</span></a>
+                        @if(Cart::instance("wishlist")->content()->where('id', $product->id)->count() > 0)
+                            <a href="javascript:void(0)" style="color: orange !important;" class="menu-link menu-link_us-s add-to-wishlist"><svg width="16"
+                                    height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_heart" />
+                                </svg><span>Quitar de favoritos</span>
+                            </a>
+                        @else
+                            <form method="POST" action="{{ route('wishlist.add') }}" id="wishlist-form">
+                            @csrf
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                <input type="hidden" name="price" value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist" onclick="document.getElementById('wishlist-form').submit();">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_heart" />
+                                    </svg>
+                                    <span>Agregar a favoritos</span>
+                                </a>
+                            </form>
+                        @endif
                         <share-button class="share-button">
                             <button
                                 class="menu-link menu-link_us-s to-share border-0 bg-transparent d-flex align-items-center">
