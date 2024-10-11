@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\Coupun;
+use App\Models\Coupon;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -389,7 +389,7 @@ class AdminController extends Controller
 
     public function coupons()
     {
-        $coupons = Coupun::orderBy("expiry_date", "DESC")->paginate(12);
+        $coupons = Coupon::orderBy("expiry_date", "DESC")->paginate(12);
         return view("admin.coupons", compact("coupons"));
     }
 
@@ -408,7 +408,7 @@ class AdminController extends Controller
             'expiry_date' => 'required|date'
         ]);
 
-        $coupon = new Coupun();
+        $coupon = new Coupon();
         $coupon->code = $request->code;
         $coupon->type = $request->type;
         $coupon->value = $request->value;
@@ -420,7 +420,7 @@ class AdminController extends Controller
 
     public function edit_coupon($id)
     {
-        $coupon = Coupun::find($id);
+        $coupon = Coupon::find($id);
         return view('admin.coupon-edit', compact('coupon'));
     }
 
@@ -434,7 +434,7 @@ class AdminController extends Controller
             'expiry_date' => 'required|date'
         ]);
 
-        $coupon = Coupun::find($request->id);
+        $coupon = Coupon::find($request->id);
         $coupon->code = $request->code;
         $coupon->type = $request->type;
         $coupon->value = $request->value;
@@ -446,7 +446,7 @@ class AdminController extends Controller
 
     public function delete_coupon($id)
     {
-        $coupon = Coupun::find($id);
+        $coupon = Coupon::find($id);
         $coupon->delete();
         return redirect()->route('admin.coupons')->with('status', '¡Cupón eliminado exitosamente!');
     }

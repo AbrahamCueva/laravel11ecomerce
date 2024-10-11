@@ -54,10 +54,10 @@
                                         <td>
                                             <div class="shopping-cart__product-item__detail">
                                                 <h4>{{ $item->name }}</h4>
-                                                <ul class="shopping-cart__product-item__options">
+                                                {{-- <ul class="shopping-cart__product-item__options">
                                                     <li>Color: Yellow</li>
                                                     <li>Size: L</li>
-                                                </ul>
+                                                </ul> --}}
                                             </div>
                                         </td>
                                         <td>
@@ -106,10 +106,10 @@
                         </table>
 
                         <div class="cart-table-footer">
-                            <form class="position-relative bg-body">
-                                <input class="form-control" type="text" name="coupon_code" placeholder="Código de cupón">
-                                <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
-                                    value="Aplicar cupón">
+                            <form action="{{ route('cart.coupon.apply') }}" method="POST" class="position-relative bg-body">
+                                @csrf
+                                <input class="form-control" type="text" name="coupon_code" placeholder="Código de cupón" value="@if (Session::has('coupon')) {{ (Session::get('coupon')['code']) }} ¡Aplicado! @endif">
+                                <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="Aplicar cupón">
                             </form>
                             <form method="POST" action="{{ route('cart.empty') }}">
                                 @csrf
@@ -117,31 +117,69 @@
                                 <button class="btn btn-light" type="submit">Vaciar cesto</button>
                             </form>
                         </div>
+                        <div>
+                            @if (Session::has('success'))
+                                <p style="color: green;">{{ Session::get('success') }}</p>
+                            @elseif(Session::has('error'))
+                                <p style="color: red;">{{ Session::get('error') }}</p>
+                            @endif
+                        </div>
                     </div>
                     <div class="shopping-cart__totals-wrapper">
                         <div class="sticky-content">
                             <div class="shopping-cart__totals">
                                 <h3>Total del cesto</h3>
-                                <table class="cart-totals">
-                                    <tbody>
-                                        <tr>
-                                            <th>Subtotal</th>
-                                            <td>${{ Cart::instance('cart')->subtotal() }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Envío</th>
-                                            <td>Gratis</td>
-                                        </tr>
-                                        <tr>
-                                            <th>IGV</th>
-                                            <td>$ {{ Cart::instance('cart')->tax() }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Total</th>
-                                            <td>$ {{ Cart::instance('cart')->total() }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                @if (Session::has('discounts'))
+                                    <table class="cart-totals">
+                                        <tbody>
+                                            <tr>
+                                                <th>Subtotal</th>
+                                                <td>$ {{ Cart::instance('cart')->subtotal() }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Descuento {{ Session::get('coupon')['code'] }}</th>
+                                                <td>$ {{ Session::get('discounts')['discount'] }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Subtotal despues del descuento</th>
+                                                <td>$ {{ Session::get('discounts')['subtotal'] }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Envío</th>
+                                                <td>Gratis</td>
+                                            </tr>
+                                            <tr>
+                                                <th>IGV</th>
+                                                <td>$ {{ Session::get('discounts')['tax'] }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Total</th>
+                                                <td>$ {{ Session::get('discounts')['total'] }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <table class="cart-totals">
+                                        <tbody>
+                                            <tr>
+                                                <th>Subtotal</th>
+                                                <td>$ {{ Cart::instance('cart')->subtotal() }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Envío</th>
+                                                <td>Gratis</td>
+                                            </tr>
+                                            <tr>
+                                                <th>IGV</th>
+                                                <td>$ {{ Cart::instance('cart')->tax() }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Total</th>
+                                                <td>$ {{ Cart::instance('cart')->total() }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                @endif
                             </div>
                             <div class="mobile_fixed-btn_wrapper">
                                 <div class="button-wrapper container">
