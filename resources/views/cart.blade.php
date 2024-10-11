@@ -106,11 +106,21 @@
                         </table>
 
                         <div class="cart-table-footer">
-                            <form action="{{ route('cart.coupon.apply') }}" method="POST" class="position-relative bg-body">
-                                @csrf
-                                <input class="form-control" type="text" name="coupon_code" placeholder="Código de cupón" value="@if (Session::has('coupon')) {{ (Session::get('coupon')['code']) }} ¡Aplicado! @endif">
-                                <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="Aplicar cupón">
-                            </form>
+                            @if (!Session::has('coupon'))
+                                <form action="{{ route('cart.coupon.apply') }}" method="POST" class="position-relative bg-body">
+                                    @csrf
+                                    <input class="form-control" type="text" name="coupon_code" placeholder="Código de cupón" value="">
+                                    <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="Aplicar cupón">
+                                </form>
+                            @else
+                                <form action="{{ route('cart.coupon.remove') }}" method="POST" class="position-relative bg-body">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input class="form-control" type="text" name="coupon_code" placeholder="Código de cupón" value="@if (Session::has('coupon')) {{ (Session::get('coupon')['code']) }} ¡Aplicado! @endif">
+                                    <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="Quitar cupón">
+                                </form>
+                            @endif
+
                             <form method="POST" action="{{ route('cart.empty') }}">
                                 @csrf
                                 @method('DELETE')
