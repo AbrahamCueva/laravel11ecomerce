@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,5 +28,14 @@ class UserController extends Controller
         $orderItems = OrderItem::where('order_id', $order_id)->orderBy('id')->paginate(12);
         $transaction = Transaction::where('order_id', $order_id)->first();
         return view('user.order-details', compact('order', 'orderItems', 'transaction'));
+    }
+
+    public function account_cancel_order(Request $request)
+    {
+        $order = Order::find($request->order_id);
+        $order->status = "canceled";
+        $order->canceled_date = Carbon::now();
+        $order->save();
+        return back()->with("status", "Pedido Cancelada exitosamente");
     }
 }
