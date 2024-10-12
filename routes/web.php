@@ -39,6 +39,8 @@ Route::get('/order-confirmation', [CartController::class, 'confirmation'])->name
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+    Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
+    Route::get('/account-order-detials/{order_id}', [UserController::class, 'account_order_details'])->name('user.acccount.order.details');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
