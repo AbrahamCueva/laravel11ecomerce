@@ -61,11 +61,11 @@
                                             <td class="text-center">${{ $order->total }}</td>
                                             <td class="text-center">
                                                 @if ($order->status == 'delivered')
-                                                    <span class="badge bg-success">Entregado</span>
+                                                    <span class="badge bg-success" style="color: green;">Entregado</span>
                                                 @elseif($order->status == 'canceled')
-                                                    <span class="badge bg-danger">Cancelado</span>
+                                                    <span class="badge bg-danger" style="color: red;">Cancelado</span>
                                                 @else
-                                                    <span class="badge bg-warning">Pedido</span>
+                                                    <span class="badge bg-warning" style="color: yellow;">Pedido</span>
                                                 @endif
                                             </td>
                                             <td class="text-center">{{ $order->created_at }}</td>

@@ -98,11 +98,11 @@
                                     <th>Estado del pedido</th>
                                     <td colspan="5">
                                         @if ($transaction->order->status == 'delivered')
-                                            <span class="badge bg-success">Entregado</span>
+                                            <span class="badge bg-success" style="color: green;">Entregado</span>
                                         @elseif($transaction->order->status == 'canceled')
-                                            <span class="badge bg-danger">Cancelado</span>
+                                            <span class="badge bg-danger" style="color: red;">Cancelado</span>
                                         @else
-                                            <span class="badge bg-warning">Pedido</span>
+                                            <span class="badge bg-warning" style="color: yellow;">Pedido</span>
                                         @endif
                                     </td>
                                 </tr>
@@ -212,13 +212,13 @@
                                     <th>Estado</th>
                                     <td>
                                         @if ($transaction->status == 'approved')
-                                            <span class="badge bg-success">Aprovado</span>
+                                            <span class="badge bg-success" style="color: green;">Aprovado</span>
                                         @elseif($transaction->status == 'declined')
-                                            <span class="badge bg-danger">Rechasado</span>
+                                            <span class="badge bg-danger" style="color: red;">Rechasado</span>
                                         @elseif($transaction->status == 'refunded')
-                                            <span class="badge bg-secondary">Reembolsado</span>
+                                            <span class="badge bg-secondary" style="color: blue;">Reembolsado</span>
                                         @else
-                                            <span class="badge bg-warning">Pendiente</span>
+                                            <span class="badge bg-warning" style="color: yellow;">Pendiente</span>
                                         @endif
                                     </td>
                                 </tr>
