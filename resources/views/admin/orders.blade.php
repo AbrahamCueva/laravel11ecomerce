@@ -56,7 +56,6 @@
                                     <th class="text-center">Subtotal</th>
                                     <th class="text-center">IGV</th>
                                     <th class="text-center">Total</th>
-                                    {{-- <th class="text-center" style="width:260px;">Address</th> --}}
                                     <th class="text-center">Estado</th>
                                     <th class="text-center">Fecha de pedido</th>
                                     <th class="text-center">Artículos totales</th>
@@ -73,11 +72,6 @@
                                         <td class="text-center">${{ $order->subtotal }}</td>
                                         <td class="text-center">${{ $order->tax }}</td>
                                         <td class="text-center">${{ $order->total }}</td>
-                                        {{-- <td class="text-center">
-                                    <p>{{$order->address}}</p>
-                                    <p>{{$order->locality}}</p>
-                                    <p>{{$order->city}}, {{$order->state}}, {{$order->zip}}</p>                                    
-                                </td> --}}
                                         <td class="text-center">{{ $order->status }}</td>
                                         <td class="text-center">{{ $order->created_at }}</td>
                                         <td class="text-center">{{ $order->orderItems->count() }}</td>
