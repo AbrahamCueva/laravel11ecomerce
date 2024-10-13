@@ -5,21 +5,10 @@
 @endpush
 
 @section('content')
-    <style>
-        .table-striped th:nth-child(1),
-        .table-striped td:nth-child(1) {
-            width: 100px;
-        }
-
-        .table-striped th:nth-child(2),
-        .table-striped td:nth-child(2) {
-            width: 250px;
-        }
-    </style>
     <div class="main-content-inner">
         <div class="main-content-wrap">
             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                <h3>Cupones</h3>
+                <h3>Slides</h3>
                 <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                     <li>
                         <a href="{{ route('admin.index') }}">
@@ -30,7 +19,7 @@
                         <i class="icon-chevron-right"></i>
                     </li>
                     <li>
-                        <div class="text-tiny">Todos los cupones</div>
+                        <div class="text-tiny">Slides</div>
                     </li>
                 </ul>
             </div>
@@ -48,53 +37,54 @@
                             </div>
                         </form>
                     </div>
-                    <a class="tf-button style-1 w208" href="{{ route('admin.coupon.add') }}"><i
-                            class="icon-plus"></i>Agregar cupón</a>
+                    <a class="tf-button style-1 w208" href="{{ route('admin.slide.add') }}"><i class="icon-plus"></i>Agregar
+                        slide</a>
                 </div>
                 <div class="wg-table table-all-user">
+                    @if (Session::has('status'))
+                        <p class="alert alert-success">{{ Session::get('status') }}</p>
+                    @endif
                     <div class="table-responsive">
-                        @if (Session::has('status'))
-                            <p class="alert alert-success">{{ Session::get('status') }}</p>
-                        @endif
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Código</th>
-                                    <th>Tipo</th>
-                                    <th>Valor</th>
-                                    <th>Valor de cesto</th>
-                                    <th>Expiración</th>
+                                    <th>Imágen</th>
+                                    <th>Lema</th>
+                                    <th>Título</th>
+                                    <th>Subtítulo</th>
+                                    <th>Link</th>
                                     <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($coupons as $coupon)
+                                @foreach ($slides as $slide)
                                     <tr>
-                                        <td>{{ $coupon->id }}</td>
-                                        <td>{{ $coupon->code }}</td>
-                                        <td>{{ $coupon->type }}</td>
-                                        <td>{{ $coupon->value }}</td>
-                                        <td>{{ $coupon->cart_value }}</td>
-                                        <td>{{ $coupon->expiry_date }}</td>
+                                        <td>{{ $slide->id }}</td>
+                                        <td class="pname">
+                                            <div class="image">
+                                                <img src="{{ asset('uploads/slides') }}/{{ $slide->image }}"
+                                                    alt="{{ $slide->title }}" class="image">
+                                            </div>
+                                        </td>
+                                        <td>{{ $slide->tagline }}</td>
+                                        <td>{{ $slide->title }}</td>
+                                        <td>{{ $slide->subtitle }}</td>
+                                        <td>{{ $slide->link }}</td>
                                         <td>
                                             <div class="list-icon-function">
-                                                <div class="list-icon-function">
-                                                    <a href="{{ route('admin.coupon.edit', ['id' => $coupon->id]) }}">
-                                                        <div class="item edit">
-                                                            <i class="icon-edit-3"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="list-icon-function">                                                        
-                                                    <form action="{{route('admin.coupon.delete',['id'=>$coupon->id])}}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <div class="item text-danger delete">
-                                                            <i class="icon-trash-2"></i>
-                                                        </div>
-                                                    </form>
-                                            </div>
+                                                <a href="{{ route('admin.slide.edit', ['id' => $slide->id]) }}">
+                                                    <div class="item edit">
+                                                        <i class="icon-edit-3"></i>
+                                                    </div>
+                                                </a>
+                                                <form action="{{ route('admin.slide.delete', ['id' => $slide->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <div class="item text-danger delete">
+                                                        <i class="icon-trash-2"></i>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -105,7 +95,7 @@
                 </div>
                 <div class="divider"></div>
                 <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-                    {{ $coupons->links('pagination::bootstrap-5') }}
+                    {{ $slides->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         </div>
