@@ -21,7 +21,8 @@
                                     height="733" alt="Woman Fashion 1"
                                     class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
                                 <div class="character_markup type2">
-                                    <p class="text-uppercase font-sofia mark-grey-color animate animate_fade animate_btt animate_delay-10 mb-0">
+                                    <p
+                                        class="text-uppercase font-sofia mark-grey-color animate animate_fade animate_btt animate_delay-10 mb-0">
                                         {{ $slide->tagline }}
                                     </p>
                                 </div>
@@ -30,9 +31,11 @@
                                 {{-- <h6
                                     class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
                                     New Arrivals</h6> --}}
-                                <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">{{ $slide->title }}
+                                <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">
+                                    {{ $slide->title }}
                                 </h2>
-                                <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">{{ $slide->subtitle }}</h2>
+                                <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">
+                                    {{ $slide->subtitle }}</h2>
                                 <a href="{{ $slide->link }}"
                                     class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Ver...</a>
                             </div>
@@ -50,7 +53,7 @@
         <div class="container mw-1620 bg-white border-radius-10">
             <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
             <section class="category-carousel container">
-                <h2 class="section-title text-center mb-3 pb-xl-2 mb-xl-4">You Might Like</h2>
+                <h2 class="section-title text-center mb-3 pb-xl-2 mb-xl-4">Te puede gustar</h2>
 
                 <div class="position-relative">
                     <div class="swiper-container js-swiper-slider"
@@ -92,66 +95,19 @@
                             }
                         }'>
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img loading="lazy" class="w-100 h-auto mb-3" src="{{ asset('assets/images/home/demo3/category_1.png') }}"
-                                    width="124" height="124" alt="" />
-                                <div class="text-center">
-                                    <a href="#" class="menu-link fw-medium">Women<br />Tops</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" class="w-100 h-auto mb-3" src="{{ asset('assets/images/home/demo3/category_2.png') }}"
-                                    width="124" height="124" alt="" />
-                                <div class="text-center">
-                                    <a href="#" class="menu-link fw-medium">Women<br />Pants</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" class="w-100 h-auto mb-3" src="{{ asset('assets/images/home/demo3/category_3.png') }}"
-                                    width="124" height="124" alt="" />
-                                <div class="text-center">
-                                    <a href="#" class="menu-link fw-medium">Women<br />Clothes</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" class="w-100 h-auto mb-3" src="{{ asset('assets/images/home/demo3/category_4.png') }}"
-                                    width="124" height="124" alt="" />
-                                <div class="text-center">
-                                    <a href="#" class="menu-link fw-medium">Men<br />Jeans</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" class="w-100 h-auto mb-3"
-                                    src="{{ asset('assets/images/home/demo3/category_5.png') }}" width="124" height="124"
-                                    alt="" />
-                                <div class="text-center">
-                                    <a href="#" class="menu-link fw-medium">Men<br />Shirts</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" class="w-100 h-auto mb-3"
-                                    src="{{ asset('assets/images/home/demo3/category_6.png') }}" width="124" height="124"
-                                    alt="" />
-                                <div class="text-center">
-                                    <a href="#" class="menu-link fw-medium">Men<br />Shoes</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" class="w-100 h-auto mb-3"
-                                    src="{{ asset('assets/images/home/demo3/category_7.png') }}" width="124" height="124"
-                                    alt="" />
-                                <div class="text-center">
-                                    <a href="#" class="menu-link fw-medium">Women<br />Dresses</a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" class="w-100 h-auto mb-3"
-                                    src="{{ asset('assets/images/home/demo3/category_8.png') }}" width="124" height="124"
-                                    alt="" />
-                                <div class="text-center">
-                                    <a href="#" class="menu-link fw-medium">Kids<br />Tops</a>
-                                </div>
-                            </div>
+                            @foreach ($categories as $category)
+                                @if ($category->products->count() > 0)
+                                    <div class="swiper-slide">
+                                        <img loading="lazy" class="w-100 h-auto mb-3"
+                                            src="{{ asset('uploads/categories') }}/{{ $category->image }}" width="124"
+                                            height="124" alt="" />
+                                        <div class="text-center">
+                                            <a href="{{ route('shop.index', ['categories' => $category->id]) }}"
+                                                class="menu-link fw-medium">{{ $category->name }}</a>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div><!-- /.swiper-wrapper -->
                     </div><!-- /.swiper-container js-swiper-slider -->
 
@@ -246,10 +202,12 @@
                                     <div class="swiper-slide product-card product-card_style3">
                                         <div class="pc__img-wrapper">
                                             <a href="details.html">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-0-1.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-0-1.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-0-2.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-0-2.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img pc__img-second">
                                             </a>
@@ -291,10 +249,12 @@
                                     <div class="swiper-slide product-card product-card_style3">
                                         <div class="pc__img-wrapper">
                                             <a href="details.html">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-1-1.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-1-1.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-1-2.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-1-2.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img pc__img-second">
                                             </a>
@@ -335,10 +295,12 @@
                                     <div class="swiper-slide product-card product-card_style3">
                                         <div class="pc__img-wrapper">
                                             <a href="details.html">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-2-1.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-2-1.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-2-2.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-2-2.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img pc__img-second">
                                             </a>
@@ -379,10 +341,12 @@
                                     <div class="swiper-slide product-card product-card_style3">
                                         <div class="pc__img-wrapper">
                                             <a href="details.html">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-3-1.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-3-1.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-3-2.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-3-2.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img pc__img-second">
                                             </a>
@@ -424,10 +388,12 @@
                                     <div class="swiper-slide product-card product-card_style3">
                                         <div class="pc__img-wrapper">
                                             <a href="details.html">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-0-1.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-0-1.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-0-2.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-0-2.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img pc__img-second">
                                             </a>
@@ -469,10 +435,12 @@
                                     <div class="swiper-slide product-card product-card_style3">
                                         <div class="pc__img-wrapper">
                                             <a href="details.html">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-1-1.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-1-1.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-1-2.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-1-2.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img pc__img-second">
                                             </a>
@@ -513,10 +481,12 @@
                                     <div class="swiper-slide product-card product-card_style3">
                                         <div class="pc__img-wrapper">
                                             <a href="details.html">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-2-1.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-2-1.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-2-2.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-2-2.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img pc__img-second">
                                             </a>
@@ -557,10 +527,12 @@
                                     <div class="swiper-slide product-card product-card_style3">
                                         <div class="pc__img-wrapper">
                                             <a href="details.html">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-3-1.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-3-1.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img">
-                                                <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-3-2.jpg') }}"
+                                                <img loading="lazy"
+                                                    src="{{ asset('assets/images/home/demo3/product-3-2.jpg') }}"
                                                     width="258" height="313" alt="Cropped Faux leather Jacket"
                                                     class="pc__img pc__img-second">
                                             </a>
@@ -612,8 +584,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="category-banner__item border-radius-10 mb-5">
-                            <img loading="lazy" class="h-auto" src="{{ asset('assets/images/home/demo3/category_9.jpg') }}"
-                                width="690" height="665" alt="" />
+                            <img loading="lazy" class="h-auto"
+                                src="{{ asset('assets/images/home/demo3/category_9.jpg') }}" width="690"
+                                height="665" alt="" />
                             <div class="category-banner__item-mark">
                                 Starting at $19
                             </div>
@@ -626,8 +599,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="category-banner__item border-radius-10 mb-5">
-                            <img loading="lazy" class="h-auto" src="{{ asset('assets/images/home/demo3/category_10.jpg') }}"
-                                width="690" height="665" alt="" />
+                            <img loading="lazy" class="h-auto"
+                                src="{{ asset('assets/images/home/demo3/category_10.jpg') }}" width="690"
+                                height="665" alt="" />
                             <div class="category-banner__item-mark">
                                 Starting at $19
                             </div>
@@ -651,8 +625,8 @@
                         <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
                             <div class="pc__img-wrapper">
                                 <a href="details.html">
-                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-4.jpg') }}" width="330"
-                                        height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-4.jpg') }}"
+                                        width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                                 </a>
                             </div>
 
@@ -690,8 +664,8 @@
                         <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
                             <div class="pc__img-wrapper">
                                 <a href="details.html">
-                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-5.jpg') }}" width="330"
-                                        height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-5.jpg') }}"
+                                        width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                                 </a>
                             </div>
 
@@ -729,8 +703,8 @@
                         <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
                             <div class="pc__img-wrapper">
                                 <a href="details.html">
-                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-6.jpg') }}" width="330"
-                                        height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-6.jpg') }}"
+                                        width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                                 </a>
                                 <div class="product-label text-uppercase bg-white top-0 left-0 mt-2 mx-2">New</div>
                             </div>
@@ -769,8 +743,8 @@
                         <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
                             <div class="pc__img-wrapper">
                                 <a href="details.html">
-                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-7.jpg') }}" width="330"
-                                        height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-7.jpg') }}"
+                                        width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                                 </a>
                                 <div class="product-label bg-red text-white right-0 top-0 left-auto mt-2 mx-2">-67%
                                 </div>
@@ -811,8 +785,8 @@
                         <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
                             <div class="pc__img-wrapper">
                                 <a href="details.html">
-                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-8.jpg') }}" width="330"
-                                        height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-8.jpg') }}"
+                                        width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                                 </a>
                             </div>
 
@@ -850,8 +824,8 @@
                         <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
                             <div class="pc__img-wrapper">
                                 <a href="details.html">
-                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-9.jpg') }}" width="330"
-                                        height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-9.jpg') }}"
+                                        width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                                 </a>
                             </div>
 
@@ -889,8 +863,8 @@
                         <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
                             <div class="pc__img-wrapper">
                                 <a href="details.html">
-                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-10.jpg') }}" width="330"
-                                        height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-10.jpg') }}"
+                                        width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                                 </a>
                             </div>
 
@@ -928,8 +902,8 @@
                         <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
                             <div class="pc__img-wrapper">
                                 <a href="details.html">
-                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-11.jpg') }}" width="330"
-                                        height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+                                    <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-11.jpg') }}"
+                                        width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                                 </a>
                             </div>
 
