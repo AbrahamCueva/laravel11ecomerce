@@ -149,6 +149,13 @@
                                 </li>
 
                                 <li class="menu-item">
+                                    <a href="{{ route('admin.contacts') }}" class="">
+                                        <div class="icon"><i class="icon-mail"></i></div>
+                                        <div class="text">Contáctenos</div>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item">
                                     <a href="users.html" class="">
                                         <div class="icon"><i class="icon-user"></i></div>
                                         <div class="text">Usuarios</div>
@@ -393,10 +400,6 @@
                                         </ul>
                                     </div>
                                 </div>
-
-
-
-
                                 <div class="popup-wrap user type-header">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"

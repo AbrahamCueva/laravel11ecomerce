@@ -324,7 +324,7 @@
                             <a href="about.html" class="navigation__link">Sobre nosotros</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Contáctenos</a>
+                            <a href="{{ route('contact') }}" class="navigation__link">Contáctenos</a>
                         </li>
                     </ul>
                 </div>
@@ -413,7 +413,7 @@
                             <a href="about.html" class="navigation__link">Sobre nosotors</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Contáctenos</a>
+                            <a href="{{ route('contact') }}" class="navigation__link">Contáctenos</a>
                         </li>
                     </ul>
                 </nav>
