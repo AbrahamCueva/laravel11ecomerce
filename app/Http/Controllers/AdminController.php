@@ -653,4 +653,11 @@ class AdminController extends Controller
         $contact->delete();
         return redirect()->route('admin.contacts')->with('status', 'Menjae eliminado exitosamente!');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $results = Product::where('name', 'LIKE', "%{$query}%")->get()->take(8);
+        return response()->json($results);
+    }
 }

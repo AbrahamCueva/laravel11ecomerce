@@ -93,4 +93,6 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
 
     Route::get('/admin/contacts', [AdminController::class,'contacts'])->name('admin.contacts');
     Route::delete('/admin/contacts/{id}/delete', [AdminController::class,'contact_delete'])->name('admin.contact.delete');
+
+    Route::get('/admin/search', [HomeController::class, 'search'])->name('admin.search');
 });

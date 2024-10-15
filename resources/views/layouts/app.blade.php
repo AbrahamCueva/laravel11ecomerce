@@ -466,7 +466,7 @@
                                 <p class="text-uppercase text-secondary fw-medium mb-4">¿Qué estás buscando?</p>
                                 <div class="position-relative">
                                     <input class="search-field__input search-popup__input w-100 fw-medium"
-                                        type="text" name="search-keyword" id="search-input"
+                                        type="text" name="search-keyword" id="search-input" autocomplete="off"
                                         placeholder="Buscar productos" />
                                     <button class="btn-icon search-popup__submit" type="submit">
                                         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20"
