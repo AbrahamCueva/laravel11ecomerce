@@ -40,6 +40,8 @@ Route::get('/order-confirmation', [CartController::class, 'confirmation'])->name
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact/store', [HomeController::class, 'contact_store'])->name('contact.store');
 
+Route::get('/search', [HomeController::class, 'search'])->name('home.search');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
     Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
