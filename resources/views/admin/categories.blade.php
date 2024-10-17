@@ -24,17 +24,6 @@
 
             <div class="wg-box">
                 <div class="flex items-center justify-between gap10 flex-wrap">
-                    <div class="wg-filter flex-grow">
-                        <form class="form-search">
-                            <fieldset class="name">
-                                <input type="text" placeholder="Buscar aquí..." class="" name="name"
-                                    tabindex="2" value="" aria-required="true" required="">
-                            </fieldset>
-                            <div class="button-submit">
-                                <button class="" type="submit"><i class="icon-search"></i></button>
-                            </div>
-                        </form>
-                    </div>
                     <a class="tf-button style-1 w208" href="{{ route('admin.category.add') }}"><i class="icon-plus"></i>Agregar
                         categoría</a>
                 </div>
@@ -67,7 +56,7 @@
                                             </div>
                                         </td>
                                         <td>{{ $category->slug }}</td>
-                                        <td><a href="#" target="_blank">0</a></td>
+                                        <td><a href="#" target="_blank">{{ $category->products->count() }}</a></td>
                                         <td>
                                             <div class="list-icon-function">
                                                 <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}">

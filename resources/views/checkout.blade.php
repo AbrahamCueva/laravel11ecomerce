@@ -220,40 +220,13 @@
                                 @endif
                             </div>
                             <div class="checkout__payment-methods">
+                            
                                 <div class="form-check">
-                                    <input class="form-check-input form-check-input_fill" type="radio" name="mode"
-                                        id="mode1" value="card">
-                                    <label class="form-check-label" for="mode1">
-                                        Tarjeta de crédito o débito
-                                        <p class="option-detail">
-                                            Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida
-                                            nec dui. Aenean
-                                            aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra
-                                            nunc, ut aliquet
-                                            magna posuere eget.
-                                        </p>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input form-check-input_fill" type="radio" name="mode"
-                                        id="mode2" value="paypal">
-                                    <label class="form-check-label" for="mode2">
-                                        Paypal
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input form-check-input_fill" type="radio" name="mode"
+                                    <input class="form-check-input form-check-input_fill required" type="radio" name="mode"
                                         id="mode3" value="cod">
                                     <label class="form-check-label" for="mode3">
                                         Pago contra entrega
                                     </label>
-                                </div>
-                                <div class="policy-text">
-                                    Tus datos personales serán utilizados para procesar tu pedido, apoyar tu experiencia a
-                                    lo largo de este
-                                    sitio web, y para otros propósitos descritos en nuestra <a href="terms.html"
-                                        target="_blank">política de
-                                        privacidad</a>.
                                 </div>
                             </div>
                             <button class="btn btn-primary btn-checkout">Realizar pedido</button>

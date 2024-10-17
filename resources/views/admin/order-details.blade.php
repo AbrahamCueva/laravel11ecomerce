@@ -20,12 +20,12 @@
                         <i class="icon-chevron-right"></i>
                     </li>
                     <li>
-                        <div class="text-tiny">Order Items</div>
+                        <div class="text-tiny">Detalles de pedido</div>
                     </li>
                 </ul>
             </div>
 
-            <div class="wg-box mt-5 mb-5">
+            <div class="wg-box mt-5 mb-5 table-responsive">
                 <div class="flex items-center justify-between gap10 flex-wrap">
                     <div class="wg-filter flex-grow">
                         <h5>Detalles de pedido</h5>
@@ -147,7 +147,7 @@
                 </div>
             </div>
 
-            <div class="wg-box mt-5">
+            <div class="wg-box mt-5 table-responsive">
                 <h5>Transacciones</h5>
                 <table class="table table-striped table-bordered table-transaction">
                     <tr>
