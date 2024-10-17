@@ -13,7 +13,7 @@
                     <div class="page-content my-account__dashboard">
                         <p>Hola <strong>{{ Auth::user()->name }}</strong></p>
                         <p>Desde el panel de control de tu cuenta, puedes ver tus <a class="unerline-link"
-                                href="{{ route('user.orders') }}l">pedidos</p>
+                                href="{{ route('user.orders') }}">pedidos</p>
                     </div>
                 </div>
             </div>
