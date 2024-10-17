@@ -13,10 +13,8 @@
                     <div class="page-content my-account__dashboard">
                         <p>Hola <strong>{{ Auth::user()->name }}</strong></p>
                         <p>Desde el panel de control de tu cuenta, puedes ver tus <a class="unerline-link"
-                                href="account_orders.html">pedidos
-                                recientes</a>, gestionar tus <a class="unerline-link" href="account_edit_address.html">direcciones de
-                                envío</a>, y <a class="unerline-link" href="account_edit.html">editar tu contraseña y detalles de la cuenta.</a></p>
-                    </div>                    
+                                href="{{ route('user.orders') }}l">pedidos</p>
+                    </div>
                 </div>
             </div>
         </section>

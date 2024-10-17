@@ -162,7 +162,9 @@
                         <th>Total</th>
                         <td>${{ $transaction->order->total }}</td>
                         <th>Método de pago</th>
-                        <td>{{ $transaction->mode }}</td>
+                        @if ($transaction->mode == 'cod')
+                            <td>Pago contra entrega</td>
+                        @endif
                         <th>Estado</th>
                         <td>
                             @if ($transaction->status == 'approved')

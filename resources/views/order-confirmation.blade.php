@@ -56,7 +56,9 @@
                     </div>
                     <div class="order-info__item">
                         <label>Método de pago</label>
-                        <span>{{ $order->transaction->mode }}</span>
+                        @if ($order->transaction->mode == 'cod')
+                            <span>Pago contra entrega</span>
+                        @endif
                     </div>
                 </div>
                 <div class="checkout__totals-wrapper">
