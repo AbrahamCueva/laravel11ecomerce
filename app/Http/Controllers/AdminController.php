@@ -11,8 +11,10 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Slide;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -659,5 +661,30 @@ class AdminController extends Controller
         $query = $request->input('query');
         $results = Product::where('name', 'LIKE', "%{$query}%")->get()->take(8);
         return response()->json($results);
+    }
+
+    public function config()
+    {
+        $user = Auth::user();
+        return view('admin.config', compact('user'));
+    }
+
+    public function update_user(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $request->id,
+            'mobile' => 'required|digits:9',
+            'password' => 'nullable|min:8|confirmed', 
+        ]);
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->mobile = $request->mobile;
+        if (!empty($request->password)) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+        return redirect()->back()->with('status', '¡Usuario actualizado exitosamente!');
     }
 }

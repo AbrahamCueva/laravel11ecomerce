@@ -49,6 +49,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
     Route::get('/account-order-detials/{order_id}', [UserController::class, 'account_order_details'])->name('user.acccount.order.details');
     Route::put('/account-order/cancel-order', [UserController::class, 'account_cancel_order'])->name('user.account_cancel_order');
+
+    Route::get('/user-account', [UserController::class, 'account'])->name('user.account');
+    Route::put('/update_user/{id}', [UserController::class, 'update_user'])->name('user.update_user');
+
+    Route::get('/user-address', [UserController::class, 'address'])->name('user.address');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -97,4 +102,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::delete('/admin/contacts/{id}/delete', [AdminController::class,'contact_delete'])->name('admin.contact.delete');
 
     Route::get('/admin/search', [HomeController::class, 'search'])->name('admin.search');
+
+    Route::get('admin/config', [AdminController::class, 'config'])->name('admin.config');
+    Route::put('/admin/update_user/{id}', [AdminController::class, 'update_user'])->name('admin.update_user');
 });

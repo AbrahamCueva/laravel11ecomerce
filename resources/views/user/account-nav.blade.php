@@ -2,6 +2,8 @@
     <li><a href="{{ route('user.index') }}" class="menu-link menu-link_us-s">Dashboard</a></li>
     <li><a href="{{ route('user.orders') }}" class="menu-link menu-link_us-s">Pedidos</a></li>
     <li><a href="{{ route('wishlist.index') }}" class="menu-link menu-link_us-s">Favoritos</a></li>
+    <li><a href="{{ route('user.account') }}" class="menu-link menu-link_us-s">Cuenta</a></li>
+    <li><a href="{{ route('user.address') }}" class="menu-link menu-link_us-s">Dirección</a></li>
     <li>
         <form action="{{ route('logout') }}" method="POST" id="logout-form">
             @csrf

@@ -182,6 +182,13 @@
                                 </li>
 
                                 <li class="menu-item">
+                                    <a href="{{ route('admin.config') }}" class="">
+                                        <div class="icon"><i class="icon-settings"></i></div>
+                                        <div class="text">Configuración</div>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item">
                                     <form action="{{ route('logout') }}" id="logout-form" method="POST">
                                         @csrf
                                         <a href="{{ route('logout') }}" class=""
